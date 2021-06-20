@@ -3,8 +3,11 @@ package com.example.memestation.framework.datasource.network.mappers
 import com.example.memestation.bussiness.domain.model.Meme
 import com.example.memestation.bussiness.domain.utils.EntityMapper
 import com.example.memestation.framework.datasource.network.model.MemeNetworkEntity
+import javax.inject.Inject
 
-class NetworkMapper : EntityMapper<MemeNetworkEntity, Meme> {
+class NetworkMapper
+@Inject
+constructor() : EntityMapper<MemeNetworkEntity, Meme> {
 
     override fun mapFromEntity(entity: MemeNetworkEntity): Meme {
         return(

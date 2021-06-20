@@ -4,4 +4,11 @@ import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
-class MemeStationApplication : Application()
+class MemeStationApplication : Application(){
+
+    @Override
+    override fun onCreate() {
+        super.onCreate()
+    }
+
+}
