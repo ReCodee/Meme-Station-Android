@@ -8,7 +8,7 @@ class MemeRetrofitServiceImpl constructor(private val memeRetrofit : MemeRetrofi
 
     override suspend fun get(): List<MemeNetworkEntity> {
         Log.d("ApiCheck", memeRetrofit.get().toString())
-        return memeRetrofit.get().data
+        return memeRetrofit.get().data.memes
     }
 
 

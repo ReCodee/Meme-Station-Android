@@ -11,5 +11,5 @@ data class RawData(
 
     @SerializedName("data")
     @Expose
-    public val data : List<MemeNetworkEntity>
+    public val data : Data
 )

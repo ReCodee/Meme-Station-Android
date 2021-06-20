@@ -4,27 +4,27 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 data class MemeNetworkEntity(
-    @SerializedName("meme_id")
+    @SerializedName("id")
     @Expose
     val id : String,
 
-    @SerializedName("meme_name")
+    @SerializedName("name")
     @Expose
     val name : String,
 
-    @SerializedName("meme_image_url")
+    @SerializedName("url")
     @Expose
     val url : String,
 
-    @SerializedName("meme_width")
+    @SerializedName("width")
     @Expose
     val width : Int,
 
-    @SerializedName("meme_height")
+    @SerializedName("height")
     @Expose
     val height : Int,
 
-    @SerializedName("meme_box_count")
+    @SerializedName("box_count")
     @Expose
     val box_count : Int
 )
