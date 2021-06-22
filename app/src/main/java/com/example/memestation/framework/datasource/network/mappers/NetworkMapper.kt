@@ -12,11 +12,11 @@ constructor() : EntityMapper<MemeNetworkEntity, Meme> {
     override fun mapFromEntity(entity: MemeNetworkEntity): Meme {
         return(
                 Meme(entity.id,
-                entity.name,
-                entity.url,
-                entity.width,
-                entity.height,
-                entity.box_count)
+                    entity.name,
+                    entity.url,
+                    entity.width,
+                    entity.height,
+                    entity.box_count)
                 )
     }
 

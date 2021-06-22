@@ -1,6 +1,8 @@
 package com.example.memestation.framework.presentation
 
 import android.util.Log
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -20,12 +22,13 @@ class MemeViewModel
 @Inject
 constructor(private val memeRepository: MemeRepository) : ViewModel() {
 
-    private val _dataCheck : MutableLiveData<List<Meme>> = MutableLiveData()
-    public val dataCheck : LiveData<List<Meme>> get() = _dataCheck
+      val memeData : MutableState<List<Meme>> = mutableStateOf(listOf())
+         //val memeData : LiveData<List<Meme>> get() = _memeData
 
-    fun startCheck() {
+    init {
         viewModelScope.launch {
-            _dataCheck.value = memeRepository.execute()
+            memeData.value = memeRepository.execute()
+            Log.d("ApiCheck", memeData.value.toString() )
         }
     }
 }

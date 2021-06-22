@@ -7,11 +7,14 @@ import android.widget.Toast
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -21,6 +24,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Observer
 import com.example.memestation.BuildConfig
+import com.example.memestation.bussiness.domain.model.Meme
 import com.example.memestation.bussiness.interactors.MemeRepository
 import com.giphy.sdk.core.models.Media
 import com.giphy.sdk.ui.GPHContentType
@@ -29,6 +33,7 @@ import com.giphy.sdk.ui.Giphy
 import com.giphy.sdk.ui.themes.GPHTheme
 import com.giphy.sdk.ui.themes.GridType
 import com.giphy.sdk.ui.views.GiphyDialogFragment
+import com.google.accompanist.coil.rememberCoilPainter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import javax.inject.Inject
@@ -38,18 +43,21 @@ import javax.inject.Inject
 class MainActivity : AppCompatActivity(), GiphyDialogFragment.GifSelectionListener {
 
   private val memeViewModel : MemeViewModel by viewModels()
-
+  private val memeList : ArrayList<Meme> = ArrayList<Meme>()
+    
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        memeViewModel.startCheck()
-        memeViewModel.dataCheck.observe(this, Observer { dataCheck ->
 
-            Log.d("ApiCheck", dataCheck.toString())
 
-        })
-
+          
         setContent {
+            val memes = memeViewModel.memeData.value
+            Log.d("StrictChecking", memes.toString())
+          for( meme in memes ) {
+              ImageByUrl(meme)
+              break
+          }
                 MyButton()
         }
 
@@ -67,6 +75,13 @@ class MainActivity : AppCompatActivity(), GiphyDialogFragment.GifSelectionListen
 
     }
 
+    
+    @Composable
+    fun ImageByUrl(meme : Meme) {
+           val painter = rememberCoilPainter(request = meme.url)
+           Image(painter = painter, contentDescription = "Just For Testing")
+           
+    }
     @Preview
     @Composable
     fun MyButton() {

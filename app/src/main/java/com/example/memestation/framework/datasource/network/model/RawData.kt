@@ -1,6 +1,5 @@
-package com.example.memestation.bussiness.domain.model
+package com.example.memestation.framework.datasource.network.model
 
-import com.example.memestation.framework.datasource.network.model.MemeNetworkEntity
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
