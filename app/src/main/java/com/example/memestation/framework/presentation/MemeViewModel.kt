@@ -13,6 +13,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -27,8 +28,13 @@ constructor(private val memeRepository: MemeRepository) : ViewModel() {
 
     init {
         viewModelScope.launch {
-            memeData.value = memeRepository.execute()
-            Log.d("ApiCheck", memeData.value.toString() )
+            memeRepository
+                .execute()
+                .onEach { meme ->
+                    memeData.value = meme
+                    Log.d("ApiCheck", meme.toString() )
+                }
+
         }
     }
 }
